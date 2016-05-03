@@ -1,0 +1,10 @@
+4th May 2016
+------------------------------------------
+
+- Configured the pi to work with SSH through Wifi
+
+- Set up a basic coding workflow, and downloaded the ECS library
+
+- Soldered Wires to Motors and connect them (More work needs to be done on wires)
+
+- Created code to move the pi forward!
