@@ -14,9 +14,6 @@ extern "C" char get_pixel(int row, int col, int color);
 extern "C" int connect_to_server( char server_addr[15],int port);
 extern "C" int send_to_server(char message[24]);
 extern "C" int receive_from_server(char message[24]);
-void move_straight();
-void turn_left();
-void turn_right();
 void gate_opening();
 
 
@@ -29,56 +26,7 @@ int main()
 
     gate_opening();
 
-//    while(true){//line - will break when walls detected
-//        take_picture();
-//        int error = 0;
-//        for (int i = 0; i < 320; i++){
-//            int w = get_pixel(120, i, 3);
-//            //handles white noise
-//            if (w < 200){
-//                w = 0;
-//            } else {
-//                w = 1;
-//            }
-//            error += (i-160) * w;
-//        }
-//        if (error > 10){//error margin not going to be exactly 0 ever
-//            turn_right();
-//        } else if (error < 10){
-//            turn_left();
-//        } else{
-//            move_straight();
-//        }
-//    }
-
-//    while (true){//maze
-//
-//    }
-
     return 0;
-}
-
-
-
-void move_straight()
-{
-    set_motor(1, 255); //right wheel
-    set_motor(2, 255); //left wheel
-
-}
-
-void turn_right()
-{
-    set_motor(1, -255); //right backwards
-    set_motor(2, 255); //left forwards
-
-}
-
-void turn_left()
-{
-    set_motor(1, 255);//right forwards
-    set_motor(2, -255);//left backwards
-
 }
 
 void gate_opening()
