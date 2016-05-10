@@ -8,3 +8,12 @@
 - Soldered Wires to Motors and connect them (More work needs to be done on wires)
 
 - Created code to move the pi forward!
+
+10th May 2016
+------------------------------------------------
+
+- Opened the network gate
+
+- Wrote PID control code
+
+- Commented on all parts of the code to let others now what's up
