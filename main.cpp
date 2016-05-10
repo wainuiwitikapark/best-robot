@@ -86,7 +86,7 @@ void gate_opening()
     //gate closed
     connect_to_server("130.195.6.196", 1024); //connects to gate server
     send_to_server("Please");//requests password
-    char message[24];//initialises variable to store password
+    char message[6];//initialises variable to store password
     receive_from_server(message);//sets variable to password
     send_to_server(message);//sends password to server
     //gate opens
