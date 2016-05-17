@@ -27,6 +27,8 @@ void check_wall()
 		sensor2_reading = ReadAnalog(1);
 		sensor3_reading = ReadAnalog(2);
 		sensor4_reading = ReadAnalog(3);
+		
+		forwards();
 
 		if (check_front() = 1)
 		{
