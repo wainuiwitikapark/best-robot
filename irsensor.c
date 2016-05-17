@@ -33,7 +33,15 @@ void check_wall()
 		if (check_front() = 1)
 		{
 		  stop();
-		  backwards();
+		  if (check_left() = 1)
+		  {
+		  	if (check_right() = 1)
+		  	{
+		  		backwards();
+		  	}
+		  	turn_right(1);
+		  }
+		  turn_left(1);
 		}
 
 		if (check_back() = 1)
