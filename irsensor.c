@@ -17,23 +17,44 @@ int main()
 	check_wall();
 }
 
-// The function that contains the loop which checks the wall
+// The function that contains the loop which constantly runs while the robot is moving
 void check_wall()
 {
 
 	while (true){
-		//Assuming front sensor is port 0, 1 is left and 2 is right
+		//Assuming front sensor is port 0, 1 is left and 2 is right, and 3 is back
 		sensor1_reading = ReadAnalog(0);
 		sensor2_reading = ReadAnalog(1);
 		sensor3_reading = ReadAnalog(2);
 		sensor4_reading = ReadAnalog(3);
 
-		if (check_front = 1)
+		if (check_front() = 1)
 		{
+		  stop();
+		  backwards();
+		}
 
+		if (check_back() = 1)
+		{	
+		  stop();
+		  turn_left();
+		}
+
+		if (check_left() = 1)
+		{
+		  stop();
+		  turn_right();
+		}
+
+		if (check_right() = 1)
+		{
+		  stop();
+		  turn_left();
 		}
 	}
 }
+
+// The below code assums motor_1 is left and motor_2 is right
 
 void stop()
 {
@@ -42,13 +63,29 @@ void stop()
 }
 
 void forwards(){
-    set_motor(2, 0);
-    set_motor(1, 0);
+    set_motor(2, default_speed);
+    set_motor(1, default_speed);
+}
+
+void backwards(){
+    set_motor(2, -(default_speed));
+    set_motor(1, -(default_speed));
 }
 
 void turn_left(int factor){
     int motor_1 = default_speed * factor;
     int motor_2 = default_speed / 2;
+
+    set_motor(1, motor_1);
+    set_motor(2, motor_2);
+}
+
+void turn_right(int factor){
+    int motor_1 = default_speed / 2;
+    int motor_2 = default_speed * factor;
+
+    set_motor(1, motor_1);
+    set_motor(2, motor_2);
 }
 
 // 1 is true, 0 is false
