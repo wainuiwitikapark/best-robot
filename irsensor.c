@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <time.h>
+include <unistd.h>
 
 extern "C" int init(int d_lev);
 extern "C" int read_analog(int ch_adc);
@@ -69,6 +69,7 @@ void stop()
 {
     set_motor(2, 0);
     set_motor(1, 0);
+	sleep(100;
 }
 
 void forwards(){
@@ -77,24 +78,28 @@ void forwards(){
 }
 
 void turn_around(){
-    //set_motor(2, -(default_speed));
-    //set_motor(1, -(default_speed));
+    set_motor(1, default_speed);
+    set_motor(2, 0);
+	sleep(2000);
 }
 
 void turn_left(int factor){
-    int motor_1 = default_speed * factor;
-    int motor_2 = default_speed / 2;
+	
+    int motor_1 = default_speed;
+    int motor_2 = 0;
 
     set_motor(1, motor_1);
     set_motor(2, motor_2);
+	sleep(1000);
 }
 
 void turn_right(int factor){
-    int motor_1 = default_speed / 2;
-    int motor_2 = default_speed * factor;
+    int motor_1 = 0;
+    int motor_2 = default_speed;
 
     set_motor(1, motor_1);
     set_motor(2, motor_2);
+	sleep(1000);
 }
 
 // 1 is true, 0 is false
