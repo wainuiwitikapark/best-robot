@@ -22,45 +22,44 @@ void check_wall()
 {
 
 	while (true){
-		//Assuming front sensor is port 0, 1 is left and 2 is right, and 3 is back
+		//Assuming front sensor is port 0, 1 is left and 2 is right
 		sensor1_reading = ReadAnalog(0);
 		sensor2_reading = ReadAnalog(1);
 		sensor3_reading = ReadAnalog(2);
-		sensor4_reading = ReadAnalog(3);
 		
-		forwards();
-
-		if (check_front() = 1)
+		
+		if (check_front() == 0 && check_left() == 1 && check_right() == 1)
+		{
+		  forwards();
+		}
+		
+		else if (check_front() == 1 && check_left() == 1 && check_right() == 1)
 		{
 		  stop();
-		  if (check_left() = 1)
-		  {
-		  	if (check_right() = 1)
-		  	{
-		  		backwards();
-		  	}
-		  	turn_right(1);
-		  }
-		  turn_left(1);
+		  turn_around();
 		}
 
-		if (check_back() = 1)
-		{	
-		  stop();
-		  turn_left();
-		}
-
-		if (check_left() = 1)
-		{
-		  stop();
-		  turn_right();
-		}
-
-		if (check_right() = 1)
+		else if (check_left() = 0 && check_right() == 1 && check_front == 1)
 		{
 		  stop();
 		  turn_left();
 		}
+
+		else if (check_right() == 0 && check_left() == 1 && check_front == 1)
+		{
+		  stop();
+		  turn_left();
+		}
+		else if (check_front() == 0 && check_left() == 0)
+		{
+			stop();
+			turn_left();
+		}
+		else if (check_front() == 0)
+		{
+			forwards();
+		}
+		
 	}
 }
 
@@ -77,9 +76,9 @@ void forwards(){
     set_motor(1, default_speed);
 }
 
-void backwards(){
-    set_motor(2, -(default_speed));
-    set_motor(1, -(default_speed));
+void turn_around(){
+    //set_motor(2, -(default_speed));
+    //set_motor(1, -(default_speed));
 }
 
 void turn_left(int factor){
@@ -145,24 +144,6 @@ int check_right()
 	int max_distance_3 = 200;
 
 	if (sensor3_reading < max_distance_3)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-int check_back()
-{
-	// Reads the value from the back IR sensor
-	int sensor4_reading = ReadAnalog(3);
-
-	// If the IR sensor returns below 200, it is deemed to be too close to the wall.
-	int max_distance_4 = 200;
-
-	if (sensor4_reading < max_distance_4)
 	{
 		return 1;
 	}
