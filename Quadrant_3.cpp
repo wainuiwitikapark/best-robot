@@ -30,10 +30,10 @@ int main()
     int derivative_signal = 0; //used with kd and set_motor
     float ki = 0; //integral constant
     int integral_signal = 0; //used with ki and set_motor
-    float kp = 0.001; //proportional constant
+    float kp = 0.0015; //proportional constant
     int proportional_signal = 0; //used with kp and set_motor
 
-    int default_speed = 30;
+    int default_speed = 35;
 
 
     while(true){//line - will break when walls detected
@@ -48,7 +48,7 @@ int main()
         for (int i = 0; i < 320; i++){ //traverses a horizontal line
             int w = get_pixel(i, 120, 3); //gets brightness at each pixel
             //handles white noise
-            if (w < 120){
+            if (w < 100){
                 w = 0;
             } else {
                 w = 1;
@@ -58,7 +58,7 @@ int main()
         }
 
         //handles quadrant 3 cases
-        if ((current_error < 300 && current_error > -300 && pixelTot > 300) || (current_error < 0 && pixelTot == 160)){
+        if ((current_error < 500 && current_error > -500 && pixelTot > 300) || (current_error < 0 && pixelTot == 160)){
             turn_left();
         }
         else if (current_error > 0 && pixelTot == 160){
@@ -94,20 +94,39 @@ int main()
 }
 
 void turn_left(){
-    set_motor(2, 30);//right
-    set_motor(1, 0);//left
-    Sleep(1,000000); //time for a 90 degree left turn
+    set_motor(2, 30);//left
+    set_motor(1, 60);//right
+    Sleep(0,800000); //time for a 90 degree left turn
+    set_motor(2, 0);
+    set_motor(1, 0);
+    Sleep(0,500000);
+    set_motor(2, -40);
+    set_motor(1, -40);
+    Sleep(1,000000);
+    set_motor(2, 0);
+    set_motor(1, 0);
+    printf("left");
+}
+
+
+void turn_around(){
+    set_motor(2, 40);
+    set_motor(1, 40);
+    Sleep(1, 350000); //time for a little overshoot
+    set_motor(2, 40);
+    set_motor(1, -40);
+    Sleep(1,300000); //time for a 180 degree turn
     set_motor(2, 0);
     set_motor(1, 0);
 }
 
 void turn_around(){
-    set_motor(2, 30);
-    set_motor(1, 30);
-    Sleep(1, 000000); //time for a little overshoot
-    set_motor(2, 30);
-    set_motor(1, -30);
-    Sleep(1,000000); //time for a 180 degree turn
+    set_motor(2, 40);
+    set_motor(1, 40);
+    Sleep(1, 350000); //time for a little overshoot
+    set_motor(2, 40);
+    set_motor(1, -40);
+    Sleep(1,300000); //time for a 180 degree turn
     set_motor(2, 0);
     set_motor(1, 0);
 }
