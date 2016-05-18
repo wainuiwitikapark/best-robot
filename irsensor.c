@@ -5,7 +5,7 @@ extern "C" int init(int d_lev);
 extern "C" int read_analog(int ch_adc);
 extern "C" int set_motor(int motor, int speed);
 
-int default_speed = 40;
+int default_speed = 30;
 
 int main()
 {
