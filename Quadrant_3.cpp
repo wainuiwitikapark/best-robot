@@ -9,6 +9,7 @@ extern "C" int take_picture();
 extern "C" char get_pixel(int row, int col, int color);\
 void turn_left();
 void turn_around();
+void turn_right();
 
 int main()
 {
@@ -58,14 +59,42 @@ int main()
         }
 
         //handles quadrant 3 cases
-        if ((current_error < 500 && current_error > -500 && pixelTot > 300) || (current_error < 0 && pixelTot == 160)){
+        //if flat line ahead or if left turn ahead
+        if ((current_error < 500 && current_error > -500 && pixelTot > 300) || (current_error > 7000 && pixelTot >= 160 && pixelTot <=240)){
             turn_left();
         }
-        else if (current_error > 0 && pixelTot == 160){
-            set_motor(2, default_speed);
-            set_motor(1, default_speed);
+        //if possible right turn detected
+        else if (current_error < -7000 && pixelTot >= 160 && pixelTot <= 240){
+            int error_ahead = 0; //checks if there is a line ahead
+            for (int j = 100; j < 220; j++){
+                int v = get_pixel(j, 239, 3); //gets furthest away pixel
+                printf("%d\n", v);
+                if (v > 100){
+                    error_ahead++;
+                }
+            }
+            int left_ahead = 0; //checks if the robot is actually on a flat line
+            for (int k = 319; k > 260; k--){
+                int w = get_pixel(k, 150, 3);
+                if (w > 100){
+                    left_ahead++;
+                }
+            }
+            printf("%d error ahead\n", error_ahead);
+            //if the robot approached the flat line on an angle it may turn right, so check if left possible
+            if (left_ahead > 10){ 
+                turn_left();
+            }
+            else if (error_ahead > 10){ //if straight line available instead of right turn
+                set_motor(2, default_speed);
+                set_motor(1, default_speed);
+            } else{ //if there is only a right turn
+                turn_right();
+                printf("right\n");
+            }
+             
         }
-        else if (pixelTot == 0){
+        else if (pixelTot == 0){ //if robot reaches end of line, turn around
             turn_around();
         }
         else{
@@ -111,22 +140,26 @@ void turn_left(){
 
 void turn_around(){
     set_motor(2, 40);
-    set_motor(1, 40);
-    Sleep(1, 350000); //time for a little overshoot
-    set_motor(2, 40);
     set_motor(1, -40);
-    Sleep(1,300000); //time for a 180 degree turn
+    Sleep(1, 300000); //time for a 180 degree turn
+    set_motor(2, -40);
+    set_motor(1, -40);
+    Sleep(1,500000); //time for robot to back up so camera is in same spot
     set_motor(2, 0);
     set_motor(1, 0);
 }
 
-void turn_around(){
-    set_motor(2, 40);
-    set_motor(1, 40);
-    Sleep(1, 350000); //time for a little overshoot
-    set_motor(2, 40);
+void turn_right(){  
+    set_motor(2, 60);//left
+    set_motor(1, 30);//right
+    Sleep(0,800000); //time for a 90 degree left turn
+    set_motor(2, 0);
+    set_motor(1, 0);
+    Sleep(0,500000);
+    set_motor(2, -40);
     set_motor(1, -40);
-    Sleep(1,300000); //time for a 180 degree turn
+    Sleep(1,000000);
     set_motor(2, 0);
     set_motor(1, 0);
 }
+
