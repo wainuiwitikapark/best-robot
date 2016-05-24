@@ -34,3 +34,5 @@
 - Current State of AVC (Facebook Post):
 Hardware - IR sensors need to be fixed in place on the front, left and right sides. Wiring will need to be tidied up (such as fraying of the wires) once all components are added to the chassis. Battery may or may not need a better place to stay.
 Software - First 3 quadrants have been completely implemented into one file of code (yet to upload to git). Due to changes in hardware, tuning will have to be done to make sure motor speeds and PID are working correctly.
+
+- IR sensor code was commented further to increase comprehension
