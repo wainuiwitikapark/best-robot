@@ -17,3 +17,24 @@
 - Wrote PID control code
 
 - Commented on all parts of the code to let others now what's up
+
+17th May 2016
+------------------------------------------------
+
+- IR sensor was drafted
+
+20th May 2016
+------------------------------------------------
+
+- Quadrant 3 was completed
+
+24th May 2016
+------------------------------------------------
+
+- Quadrant 3 has now been completed
+
+- Quadrant 2 and 3 use PID control code to correctly navigate over the white lines
+
+- Current State of AVC (Facebook Post):
+Hardware - IR sensors need to be fixed in place on the front, left and right sides. Wiring will need to be tidied up (such as fraying of the wires) once all components are added to the chassis. Battery may or may not need a better place to stay.
+Software - First 3 quadrants have been completely implemented into one file of code (yet to upload to git). Due to changes in hardware, tuning will have to be done to make sure motor speeds and PID are working correctly.
