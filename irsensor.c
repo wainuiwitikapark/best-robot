@@ -28,34 +28,34 @@ void check_wall()
 		sensor3_reading = ReadAnalog(2);
 		
 		
-		if (check_front() == 0 && check_left() == 1 && check_right() == 1)
+		if (check_front() == 0 && check_left() == 1 && check_right() == 1) // if left and right are walls but clear ahead, then go forwards
 		{
 		  forwards();
 		}
 		
-		else if (check_front() == 1 && check_left() == 1 && check_right() == 1)
+		else if (check_front() == 1 && check_left() == 1 && check_right() == 1) // if stuck, then stop and turn around
 		{
 		  stop();
 		  turn_around();
 		}
 
-		else if (check_left() = 0 && check_right() == 1 && check_front == 1)
+		else if (check_left() = 0 && check_right() == 1 && check_front == 1) // if walls in front and right, then stop and turn left
 		{
 		  stop();
 		  turn_left();
 		}
 
-		else if (check_right() == 0 && check_left() == 1 && check_front == 1)
+		else if (check_right() == 0 && check_left() == 1 && check_front == 1) // if walls in front and left, then turn right
 		{
 		  stop();
-		  turn_left();
+		  turn_right();
 		}
-		else if (check_front() == 0 && check_left() == 0)
+		else if (check_front() == 0 && check_left() == 0) // if front and left are clear, turn left
 		{
 			stop();
 			turn_left();
 		}
-		else if (check_front() == 0)
+		else if (check_front() == 0) // if front is clear, go forwards
 		{
 			forwards();
 		}
@@ -65,40 +65,40 @@ void check_wall()
 
 // The below code assums motor_1 is left and motor_2 is right
 
-void stop()
+void stop() // sets both wheels to stop
 {
     set_motor(2, 0);
     set_motor(1, 0);
-	sleep(100;
+	sleep(1000);
 }
 
-void forwards(){
+void forwards(){ // sets both wheels forwards at speed 30
     set_motor(2, default_speed);
     set_motor(1, default_speed);
 }
 
-void turn_around(){
-    set_motor(1, default_speed);
-    set_motor(2, 0);
+void turn_around(){ // gets left wheel to go at speed 30
+    set_motor(1, default_speed); // want left wheel to turn around 180 degrees with speed 30
+    set_motor(2, 0); // tells right wheel to stay still
 	sleep(2000);
 }
 
-void turn_left(int factor){
+void turn_right(int factor){ // gets left wheel to go at speed 30
 	
-    int motor_1 = default_speed;
+    int motor_1 = default_speed; 
     int motor_2 = 0;
 
-    set_motor(1, motor_1);
-    set_motor(2, motor_2);
+    set_motor(1, motor_1); // sets left wheel to speed 30, wants it to turn left 90 degrees
+    set_motor(2, motor_2); // tells right wheel to stay still
 	sleep(1000);
 }
 
-void turn_right(int factor){
+void turn_left(int factor){
     int motor_1 = 0;
     int motor_2 = default_speed;
 
-    set_motor(1, motor_1);
-    set_motor(2, motor_2);
+    set_motor(1, motor_1); // tells left wheel to stay still
+    set_motor(2, motor_2); // sets right wheel to speed 30, wants it to turn right 90 degrees
 	sleep(1000);
 }
 
