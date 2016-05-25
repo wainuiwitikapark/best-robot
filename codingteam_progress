@@ -9,10 +9,20 @@
 
 - Created code to move the pi forward!
 
+-Detached 3rd back wheel and added a temporary one.
+
 10th May 2016
 ------------------------------------------------
 
 - Opened the network gate
+
+-Created new back wheel to fit vehicles needs.
+
+-Cut down vehicles chassis to fit in maze as well as for uncluttering purposes.
+
+-Lifted pi higher above base of chassis to create room for battery.
+
+-Created and attached front bumper underneath the base of chassis to assist in vehicles balance issues.
 
 - Wrote PID control code
 
@@ -23,10 +33,14 @@
 
 - IR sensor drafted
 
+-
+
 20th May 2016
 ------------------------------------------------
 
 - Quadrant 3 code was completed
+
+-Enclosed chassis draft created.
 
 24th May 2016
 ------------------------------------------------
@@ -35,5 +49,13 @@
 Hardware - IR sensors need to be fixed in place on the front, left and right sides. Wiring will need to be tidied up (such as fraying of the wires) once all components are added to the chassis. Battery may or may not need a better place to stay.
 Software - First 3 quadrants have been completely implemented into one file of code (yet to upload to git). Due to changes in hardware, tuning will have to be done to make sure motor speeds and PID are working correctly.
 - IR sensor was commented to increase comprehension of the code when testing
+
+25th May 2016
+------------------------------------------------
+
+-Implemented enclosed chassis and attached IR sensors.
+
+-Ideas of printing a battery holder discussed due to spacing issues.
+
 
 
