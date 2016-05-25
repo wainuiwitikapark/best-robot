@@ -43,38 +43,34 @@ void check_wall()
 		sensor2_reading = read_analog(1);
 		sensor3_reading = read_analog(2);
 
-
-		if (check_front() == 0 && check_left() == 1 && check_right() == 1) // if walls on left and right, but front is clear
-		{
-		  forwards(); // then go straight ahead
-		}
-
-		else if (check_front() == 1 && check_left() == 1 && check_right() == 1) // if stuck
-		{
-		  stop();
-		  turn_around(); // stop and turn around
-		}
-
-		else if (check_left() == 0 && check_right() == 1 && check_front() == 1) // if walls in front and right
+		if (check_left() == 0) // if walls in front and right
 		{
 		  stop();
 		  turn_left(); // then turn left
 		}
 
-		else if (check_right() == 0 && check_left() == 1 && check_front() == 1) // if walls in front and left
+		else if (check_front() == 0) // if walls on left and right, but front is clear
+		{
+		  forwards(); // then go straight ahead
+		  // then continue to follow the wall follower method
+		}
+
+		else if (check_right() == 0) // if walls in front and left
 		{
 		  stop();
 		  turn_right(); // turn right
 		}
-		else if (check_front() == 0 && check_left() == 0) // if clear ahead and left
+		
+		else  // if stuck
 		{
-			stop();
-			turn_left(); // choose to turn left
+		  stop();
+		  turn_around(); // stop and turn around
+		  // then continue to follow the wall follower method
 		}
-		else if (check_front() == 0) // if clear ahead
-		{
-			forwards(); // go straight ahead
-		}
+
+		
+
+		
 
 	}
 }
